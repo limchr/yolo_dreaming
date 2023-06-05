@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TODO times">
+    <meta name="author" content="TODO"> <!--TODOFINAL-->
+
+	<link href="style.css" rel="stylesheet">
+	<title>Deeply Dreaming about Object Detection</title>
+
+
+
+
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script src="js/grid_visu.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+
+</head>
+
+<body>
+	
+<div id="outer">
+	<div id="inner">
+
+				
+			<div id="headsection"><div id="inner_headsection">
+			<h1 id="title">Deeply Dreaming about Object Detection</h1>
+				  
+				  
+			<h3 id="authors">Authors: Christian Limberg, Augustin Harter, Andrew Melnik, Helge Ritter, Helmut Prendinger</h3>
+				  	
+				  
+			<h2 id="abstract">Abstract</h2>
+			<p id="abstract_txt">
+				
+This article introduces the DeepDream approach for object detection, which allows us to visualize how objects are represented in the YOLO framework. While Explainable Artificial Intelligence (XAI) primarily focuses on feature visualization for classification networks, this study examines object detection. For this more complex task, we found that weighting the importance of different output neurons of the network is necessary for the applicability of the DeepDream optimization approach. This research broadens the understanding of how objects are represented in a Convolutional Neural Network (CNN). Our experiments suggest that YOLO anticipates objects relative to the scene composition. YOLO does not only recognize single objects but it also has a clear representation of scene context, object sub-types, positions, and orientations. We visualize our findings with interactive, web-based demo applications, which are available on this website.
+
+
+
+
+			</p>
+			
+
+			
+			</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<div class="figure"><div class="inner_figure">
+				<a id="fig1"></a> 
+				<h3 class="figure_title"> Figure 1: Workflow of the DeepDetectionDream approach</h3>
+				<object data="figs/yolo_arc.svg" width="100%"></object>
+
+
+				<div class="figure_caption">
+					A simplified schematic of the YOLO.v4 network architecture. <a href="./figs/yolo_arc.svg">Download figure</a>
+				</div>
+			</div></div>
+
+
+
+			<div class="figure"><div class="inner_figure">
+				<a id="fig1"></a> 
+				<h3 class="figure_title"> Figure 1: Workflow of the DeepDetectionDream approach</h3>
+				<div class="size_select">
+					<img class="size_select_img" src="gfx/l.png" id="ss_13" onclick="combined.change_size('13')"></img>
+					<img class="size_select_img" src="gfx/m.png" id="ss_26" onclick="combined.change_size('26')"></img>
+					<img class="size_select_img" src="gfx/s.png" id="ss_52" onclick="combined.change_size('52')"></img>
+				</div>
+
+				<div class="fig_select">
+					<img class="fig_select_img" src="figs/out_bb/0/base.jpg" id="fs_0" onclick="combined.change_image('0')"></img>
+					<img class="fig_select_img" src="figs/out_bb/1/base.jpg" id="fs_1" onclick="combined.change_image('1')"></img>
+					<img class="fig_select_img" src="figs/out_bb/2/base.jpg" id="fs_2" onclick="combined.change_image('2')"></img>
+					<img class="fig_select_img" src="figs/out_bb/3/base.jpg" id="fs_3" onclick="combined.change_image('3')"></img>
+					<img class="fig_select_img" src="figs/out_bb/4/base.jpg" id="fs_4" onclick="combined.change_image('4')"></img>
+					<img class="fig_select_img" src="figs/out_bb/5/base.jpg" id="fs_5" onclick="combined.change_image('5')"></img>
+				</div>
+
+				<canvas id="bbs" style="width:100%;"></canvas>
+
+
+				<div class="figure_caption">
+					With our interactive visualization, the full grid layers of the YOLO.v4 network can be depicted for several images. The YOLO architecture has 3 different pathways for recognizing objects of different sizes. The recognition heads are located in 2d-grids of different resolutions. Each grid element can detect underlying objects based of 3 possible anchor box shapes. Each anchor box refines estimates of the x- and y-position, the width and the height, a confidence value and a probability vector of each class used for training. The bounding boxes are labeled with the predicted class, the certainty value and an index of the displayed anchor box (we depict only the most confident anchor box out of the 3 possible). Object proposals with a high certainty are colored blue. By the top bars, the pathway and the input image to be visualized can be selected. By hovering over the figure, the respective grid cell and the detected bounding box of the most certain anchor box is visualized. 
+					</div>
+
+			</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+			<div class="figure"><div class="inner_figure">
+				<a id="fig1"></a> 
+				<h3 class="figure_title"> Figure 1: Workflow of the DeepDetectionDream approach</h3>
+				<div class="size_select">
+					<img class="size_select_img_2" src="gfx/l.png" id="ss_13_2" onclick="combined_shift.change_size('13')"></img>
+					<img class="size_select_img_2" src="gfx/m.png" id="ss_26_2" onclick="combined_shift.change_size('26')"></img>
+					<img class="size_select_img_2" src="gfx/s.png" id="ss_52_2" onclick="combined_shift.change_size('52')"></img>
+				</div>
+
+				<div class="fig_select">
+					<img class="fig_select_img_2" src="figs/out_bb/0/base.jpg" id="fs_0_2" onclick="combined_shift.change_image('0')"></img>
+					<img class="fig_select_img_2" src="figs/out_bb/1/base.jpg" id="fs_1_2" onclick="combined_shift.change_image('1')"></img>
+					<img class="fig_select_img_2" src="figs/out_bb/2/base.jpg" id="fs_2_2" onclick="combined_shift.change_image('2')"></img>
+					<img class="fig_select_img_2" src="figs/out_bb/3/base.jpg" id="fs_3_2" onclick="combined_shift.change_image('3')"></img>
+					<img class="fig_select_img_2" src="figs/out_bb/4/base.jpg" id="fs_4_2" onclick="combined_shift.change_image('4')"></img>
+					<img class="fig_select_img_2" src="figs/out_bb/5/base.jpg" id="fs_5_2" onclick="combined_shift.change_image('5')"></img>
+				</div>
+
+				<canvas id="shift" style="width:100%;"></canvas>
+
+				<div class="figure_caption">
+					Shifting the actual input image below the grid cells makes apparent how the confidences of the anchor boxes (blue means high confidence) are shifted and neighboring grid cells get activated. By the top button rows, the pathway and the input image to be visualized can be selected. By hovering over the figure, the input image is shifted.
+					</div>
+			</div></div>
+
+
+
+
+			<div class="figure"><div class="inner_figure">
+				<a id="fig1"></a> 
+				<h3 class="figure_title"> Figure 1: Workflow of the DeepDetectionDream approach</h3>
+				
+				<iframe width="100%" height="616" src="https://www.youtube-nocookie.com/embed/8nI3izOaWV8" title="YouTube video player" frameborder="0" allow="repeat; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				
+				
+				<div class="figure_caption">
+					Video demonstrating the optimization process of several classes of the COCO data set by our proposed Deep Detection Dream approach. 
+				</div>
+			</div></div>
+
+
+			<div class="figure"><div class="inner_figure">
+				<a id="fig1"></a> 
+				<h3 class="figure_title"> Figure 1: Workflow of the DeepDetectionDream approach</h3>
+				
+				<canvas id="optloc" style="width:100%;"></canvas>
+
+				
+				<div class="figure_caption">
+					By our proposed Deep Detection Dream approach, we can generate objects in specific spatial image regions. By hovering over the image, a spatial grid cell can be selected. The image is then optimized for containing an object at this position.
+				</div>
+			</div></div>
+
+
+
+			<div class="figure"><div class="inner_figure">
+				<a id="fig1"></a> 
+				<h3 class="figure_title"> Figure 1: Workflow of the DeepDetectionDream approach</h3>
+				
+				<canvas id="opt_height" style="width:100%;"></canvas>
+
+			<div class="slidecontainer">
+			  <input type="range" min="0" max="9" value="4" class="slider" id="height_slide">
+			</div>
+
+
+			<div class="figure_caption">
+				By our proposed detection dream approach, we can generate objects with specific attributes like in this case an adjustable height. By dragging the slider below the image, the object of class person is adjusted for having a height from 10% to 100% of the image height.
+				</div>
+			</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<div class="figure"><div class="inner_figure">
+				<a id="fig1"></a> 
+				<h3 class="figure_title"> Figure 1: Workflow of the DeepDetectionDream approach</h3>
+
+
+
+				<object data="figs/deepdetectiondream.svg" width="100%"></object>
+
+
+			<div class="figure_caption">
+
+The DeepDetectionDream (D3) approach consists of two phases. In the first phase (1), bounding box information BB_d is extracted from a donor image using YOLOX. In the second phase (2), D3 is utilized to optimize a gray image such that its bounding box output BB_o matches BB_d.
+			 <a href="./figs/deepdetectiondream.pdf">Download figure</a>
+			</div>
+				 
+			</div></div>
+
+
+			<div class="figure"><div class="inner_figure">
+				<a id="fig2"></a> 
+				<h3 class="figure_title"> Figure 2: Visualization of different hyperparameter settings</h3>
+
+				<div class="grid_view2">
+					<canvas id="par_orig" style="width:100%;"></canvas>
+					<canvas id="par_opt" style="width:100%;"></canvas>
+				</div>
+			<div class="slide_view">
+				<div class="slide_label">Ratio</div>
+				<div class="slidecontainer"><input type="range" min="0" max="2" value="1" class="slider" id="par_ratio"></div>
+				<div class="slide_label" id="par_ratio_val"></div>
+			</div>
+				
+			<div class="slide_view">
+				<div class="slide_label">Learning Rate</div>
+				<div class="slidecontainer"><input type="range" min="0" max="2" value="1" class="slider" id="par_lr"></div>
+				<div class="slide_label" id="par_lr_val"></div>
+			</div>
+			<div class="slide_view">
+				<div class="slide_label">Amplification</div>
+				<div class="slidecontainer"><input type="range" min="0" max="2" value="1" class="slider" id="par_amp"></div>
+				<div class="slide_label" id="par_amp_val"></div>
+			</div>
+
+
+			<div class="figure_caption">A change in hyperparameters have different effects. The Ratio hyperparameter describes a ratio of mean square error of bounding box outputs and total variation loss. If total variation loss is setup to a higher ratio, simpler forms are generated. If the parameter is too low, however, high-frequency noise is generated. The second slider selects the learning rate of gradient descent. The third selects the amplification rate of the multiplier mask.
+			</div>
+				
+		</div></div>
+
+
+
+
+			<div class="figure"><div class="inner_figure">
+			<a id="fig3"></a> 
+			<h3 class="figure_title">Figure 3: Optimization Process Video</h3>
+
+				
+				<iframe width="100%" height="616" src="https://www.youtube-nocookie.com/embed/L0Lr-x0rUAs" title="YouTube video player" frameborder="0" allow="repeat; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+				
+			<div class="figure_caption">Video of reconstructing several images just by their objects' bounding box representations.
+			</div>
+
+		</div></div>
+
+
+
+			<div class="figure"><div class="inner_figure">
+			<a id="fig4"></a> 
+			<h3 class="figure_title">Figure 4: Optimization Results</h3>
+
+
+			<ul id="img_select">
+		  	</ul>
+
+				<div class="grid_view2">
+					<canvas id="or_im" style="width:100%;"></canvas>
+					<canvas id="opt_im" style="width:100%;"></canvas>
+				</div>
+				<div class="grid_view2">
+					<div class="checkboxdiv"><input type="checkbox" id="or_bb" /><label for="or_bb"> show bounding boxes </label></div>
+					<div class="checkboxdiv"><input type="checkbox" id="opt_bb" /><label for="opt_bb"> show bounding boxes </label></div>
+				</div>
+
+			
+			<div class="figure_caption">Several reconstructed images with and without the predicted bounding boxes. Select an image from the upper film roll to see its optimization image. Bounding boxes of both images estimated by YOLOX can be visualized by checking the corresponding checkbox under the image.
+			</div>
+
+		</div></div>
+
+
+
+
+
+			<div class="figure"><div class="inner_figure">
+			<a id="citeus"></a> 
+
+			<h3 class="figure_title">Cite Us</h3>
+			<h3 class="cite_div">This article needs to get accepted first, before a reference will spawn here.</h3>
+
+		</div></div>
+
+
+
+
+
+
+
+
+
+		</div> <!-- inner -->
+
+
+	</div> <!-- outer -->
+
+
+</body>
+
+
+</html>

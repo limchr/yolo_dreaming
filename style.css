@@ -1,0 +1,363 @@
+* {
+    box-sizing: border-box;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+
+#outer {
+	width: 100%;
+	height: 100%;
+}
+
+#inner {
+	width: 100%;
+}
+
+h1,h2,h3,h4,h5,h6 {
+}
+
+a {
+  color: rgb(50,50,50);
+}
+
+#headsection {
+  background-color: rgb(245,245,245);
+}
+#inner_headsection {
+  width: 95%;
+  max-width: 950px;
+  margin: auto;
+}
+
+#title {
+  text-align: center;
+  padding: 20px 0px 5px 0px;
+
+}
+
+#authors {
+  text-align: center;
+  padding: 0px 0px;
+
+}
+
+#subtitle {
+  text-align: center;
+  padding: 20px 0px;
+
+}
+
+#abstract {
+  margin: 0px 0px;
+}
+#abstract_txt {
+  padding: 10px 0px;
+  text-align: justify;
+}
+
+.inner_figure {
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+  padding: 10px;
+}
+
+.figure {
+background-color: rgb(255,255,255);
+}
+
+.figure:nth-child(odd) {
+background-color: rgb(245,245,245);
+}
+
+.figure_title {
+  padding: 5px 0px;
+}
+
+.figure_caption {
+  margin: 5px 0px;
+  padding: 10px 5px;
+  border-left: 2px solid grey;
+}
+
+
+#select_canvas {
+}
+
+
+.canv_in_grid {
+	width: 100%;
+} 
+
+
+.canv {
+	width:100%;
+	height:100%;
+	background-color: lightgray;
+	border: 1px solid grey;
+}
+
+
+
+
+
+
+.grid_view2 {
+	display: grid;
+    align-items: center;
+    grid-template-columns: 50% 50%;
+}
+.grid_view3 {
+	display: grid;
+    align-items: center;
+    grid-template-columns: 33% 33% 33% ;
+
+}
+
+.grid_view4 {
+	display: grid;
+    align-items: center;
+    grid-template-columns: 25% 25% 25% 25%;
+
+}
+
+
+
+
+
+.slide_view {
+	display: grid;
+    align-items: center;
+    grid-template-columns: 30% 40% 30%;
+}
+
+.slide_label {
+    text-align: center;
+    vertical-align: center;
+}
+
+
+
+
+
+
+
+
+
+.cite_div {
+	margin: 10px;
+	padding: 10px;
+	border: 2px dashed black;
+	background-color: lightgrey;
+	color: black;
+	line-height: 100%;
+  font-family: monospace;
+}
+
+
+
+
+
+
+
+
+
+
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 40px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 35px; /* Slider handle height */
+  background: #04AA6D; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #04AA6D; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+
+
+
+
+
+
+
+
+
+
+ul#img_select {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: fit-content;
+  overflow-x: auto;
+  list-style: none;
+}
+
+ul#img_select li {
+  flex: 0 0 auto;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+}
+ul#img_select li img{
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.canvas_grid {
+  display: grid;
+justify-content: center;
+grid-gap: 3px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.canvas_grid > div {
+width: 100%;
+}
+
+#select_canvas {
+}
+
+.canv_in_grid {
+width: 100%;
+} 
+
+
+.canv {
+width:100%;
+height:100%;
+background-color: lightgray;
+border: 1px solid grey;
+}
+
+.fig_select {
+display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  margin-bottom: 2px;
+
+}
+
+.size_select {
+display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 2px;
+}
+
+
+.fig_select_img {
+width: 100%;
+}
+
+.size_select_img {
+width: 100%;
+}
+.fig_select_img_2 {
+width: 100%;
+}
+
+.size_select_img_2 {
+width: 100%;
+}
+
+
+
+.bbs_visu {
+	display: grid;
+    align-items: center;
+    grid-template-columns: 50% 10% 40%;
+}
+
+.arrow{
+	width: 100%;
+}
+
+.grad_visu {
+	display: grid;
+    align-items: center;
+    grid-template-columns: 30% 5% 30% 5% 30%;
+}
+
